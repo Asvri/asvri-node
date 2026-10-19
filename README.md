@@ -27,8 +27,8 @@ const asvri = new Asvri(process.env.ASVRI_SECRET_KEY)
 ```js
 const session = await asvri.checkoutSessions.create(
   {
-    amount: 2500,                       // major units; or line_items: [{ name, quantity, amount }]
-    currency: "NGN",
+    amount: 25,                         // major units; or line_items: [{ name, quantity, amount }]
+    currency: "USD",
     description: "Order #1042",
     reference: "1042",
     customer: { name: "Ada Obi", email: "ada@example.com" },

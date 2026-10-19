@@ -1,4 +1,4 @@
-/** Shapes of what ASVRI sends back. Amounts are in major units (2500 = ₦2,500.00); times are Unix seconds. */
+/** Shapes of what ASVRI sends back. Amounts are in major units (25 = $25.00); times are Unix seconds. */
 
 export type Mode = "test" | "live"
 export type SessionStatus = "open" | "paid" | "expired"
@@ -56,7 +56,7 @@ export interface CheckoutSessionCreateParams {
   /** Major units. Required unless line_items is sent. */
   amount?: number
   line_items?: LineItem[]
-  /** Three-letter ISO code, e.g. NGN, GHS, KES, USD. */
+  /** Three-letter ISO code, e.g. USD, GBP, EUR, NGN. */
   currency: string
   description?: string
   /** Your own reference, e.g. an order number. */

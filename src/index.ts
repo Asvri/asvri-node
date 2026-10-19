@@ -11,7 +11,7 @@ import { VERSION } from "./version.js"
  *
  *   import Asvri from "asvri"
  *   const asvri = new Asvri(process.env.ASVRI_SECRET_KEY)
- *   const session = await asvri.checkoutSessions.create({ amount: 2500, currency: "NGN", success_url: "…" })
+ *   const session = await asvri.checkoutSessions.create({ amount: 25, currency: "USD", success_url: "…" })
  */
 export class Asvri {
   static readonly VERSION = VERSION
