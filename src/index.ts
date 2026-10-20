@@ -1,6 +1,9 @@
 import { HttpClient, DEFAULT_API_BASE, type ClientOptions } from "./http.js"
+import { Charges } from "./resources/charges.js"
 import { CheckoutSessions } from "./resources/checkout-sessions.js"
+import { PaymentMethods } from "./resources/payment-methods.js"
 import { Refunds } from "./resources/refunds.js"
+import { SetupSessions } from "./resources/setup-sessions.js"
 import { WebhookEndpoints } from "./resources/webhook-endpoints.js"
 import { Webhooks } from "./webhooks.js"
 import type { Mode } from "./types.js"
@@ -12,6 +15,9 @@ import { VERSION } from "./version.js"
  *   import Asvri from "asvri"
  *   const asvri = new Asvri(process.env.ASVRI_SECRET_KEY)
  *   const session = await asvri.checkoutSessions.create({ amount: 25, currency: "USD", success_url: "…" })
+ *
+ * Cards on file: asvri.setupSessions (save a card with nothing paid), asvri.paymentMethods (what was saved) and
+ * asvri.charges (charge it later, with nobody present).
  */
 export class Asvri {
   static readonly VERSION = VERSION
@@ -22,6 +28,9 @@ export class Asvri {
   readonly checkoutSessions: CheckoutSessions
   readonly refunds: Refunds
   readonly webhookEndpoints: WebhookEndpoints
+  readonly setupSessions: SetupSessions
+  readonly paymentMethods: PaymentMethods
+  readonly charges: Charges
   readonly webhooks = Webhooks
   /** "test" for sk_test_ keys, "live" for sk_live_ keys. */
   readonly mode: Mode
@@ -35,6 +44,9 @@ export class Asvri {
     this.checkoutSessions = new CheckoutSessions(http)
     this.refunds = new Refunds(http)
     this.webhookEndpoints = new WebhookEndpoints(http)
+    this.setupSessions = new SetupSessions(http)
+    this.paymentMethods = new PaymentMethods(http)
+    this.charges = new Charges(http)
   }
 }
 
