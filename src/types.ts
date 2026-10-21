@@ -187,7 +187,13 @@ export interface SetupSession {
   object: "setup_session"
   /** Open this for the customer (your page, an email, a popup)… */
   url: string
-  /** …or hand this to the browser for asvri.js to embed the session in your own page. */
+  /**
+   * …or pass this to the browser for asvri.js to embed the session in your own page
+   * (`Asvri.mountCardSetup("#card", { setupToken })`). A single-use token for this one add-card page, safe in the
+   * browser. It is never your API key: don't put your sk_ key in a page.
+   */
+  setup_token: string
+  /** @deprecated Use `setup_token`; this is the same value, still returned for older integrations. */
   client_secret: string
   status: SetupSessionStatus
   mode: Mode

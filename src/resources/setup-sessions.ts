@@ -4,7 +4,9 @@ import type { List, SetupSession, SetupSessionCreateParams, SetupSessionListPara
 
 /**
  * Cards on file, step one: a customer saves a card (or wallet) now, with nothing paid, to be charged later with
- * asvri.charges. Open the session's url, or embed it in your page with asvri.js and its client_secret.
+ * asvri.charges. Open the session's url, or embed it in your page with asvri.js and its setup_token (a single-use
+ * token for that one add-card page, safe in a browser; never put your sk_ API key in a page).
+ * Guide: https://www.asvri.com/developers/cards-on-file
  */
 export class SetupSessions {
   constructor(private readonly http: HttpClient) {}
