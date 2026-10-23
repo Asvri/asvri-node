@@ -1,6 +1,6 @@
 {
   "name": "asvri",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "ASVRI's API for Node.js: checkout sessions that take payment through every gateway you've connected, cards on file (setup sessions, saved payment methods, charges), refunds, webhook endpoints and webhook signature checks.",
   "keywords": ["asvri", "payments", "checkout", "paystack", "flutterwave", "webhooks", "africa"],
   "homepage": "https://www.asvri.com/developers",

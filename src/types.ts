@@ -13,6 +13,26 @@ export interface LineItem {
 export interface Customer {
   name?: string | null
   email?: string | null
+  /** With tax "auto": where the customer is. Given, the tax is final; left out, the pay page asks. */
+  address?: { country: string; state?: string; city?: string; postal_code?: string }
+  /** With tax "auto": the customer's VAT number (EU reverse charge when it is valid on VIES). */
+  tax_id?: string
+}
+
+/** The tax ASVRI worked out on a session that asked for it (tax "auto"). */
+export interface SessionTax {
+  /** "provisional" until the customer's country is settled; "final" once a payment starts. */
+  status: "provisional" | "final"
+  behavior: "exclusive" | "inclusive"
+  /** The prices as sent. */
+  subtotal: number
+  /** The tax. The session's amount is subtotal + tax (exclusive) or subtotal (inclusive). */
+  amount: number
+  breakdown: { name: string; rate: number; taxable_amount: number; amount: number }[]
+  reverse_charge: boolean
+  customer_country: string | null
+  customer_region: string | null
+  notes: string[]
 }
 
 export interface Payment {
@@ -39,6 +59,8 @@ export interface CheckoutSession {
   reference: string | null
   customer: Customer | null
   line_items: LineItem[] | null
+  /** null unless the session was created with tax "auto". */
+  tax: SessionTax | null
   metadata: Record<string, string> | null
   success_url: string | null
   cancel_url: string | null
@@ -71,6 +93,10 @@ export interface CheckoutSessionCreateParams {
   payment_methods?: string[]
   /** Seconds until an unpaid session expires: 300 to 604800. Default 24 hours. */
   expires_in?: number
+  /** "auto": ASVRI works out the tax with your tax rules (Payment Configuration → Tax). Left out, prices are charged as sent. */
+  tax?: "auto"
+  /** With tax "auto": "exclusive" (amounts are before tax) or "inclusive" (amounts include it). Default: your setting. */
+  tax_behavior?: "exclusive" | "inclusive"
 }
 
 export interface CheckoutSessionListParams {
